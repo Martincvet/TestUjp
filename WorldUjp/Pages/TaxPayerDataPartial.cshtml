@@ -1,0 +1,17 @@
+﻿@model Core.TaxPayer 
+@{
+    ViewData["Title"] = "TaxPayer Data";
+}
+
+    <div class="form-row">
+        <input type="hidden" asp-for="@Model.Id" />
+
+        <div class="form-group col-sm-6">
+            <label asp-for="@Model.FirstName"></label>
+            <input class="form-control" asp-for="@Model.FirstName" value="@Model.FirstName" disabled />
+        </div>
+        <div class="form-group col-sm-6">
+            <label asp-for="@Model.LastName"></label>
+            <input class="form-control" asp-for="@Model.LastName" value="@Model.LastName" disabled />
+        </div>
+    </div>

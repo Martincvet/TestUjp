@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>DDV List</title>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="C:\Users\Martin\.nuget\packages\bootstrap\4.5.0\contentFiles\any\any\wwwroot\js\bootstrap.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            GetAll();
+        });
+
+        GetAll: function () {
+            var obj = "";
+            var apiurl = "http://localhost:56139/api/GetAll";
+            window.Manager.API(apiurl, successCallBack, errorCallBack);
+            function successCallBack(jsonData) {
+                obj = jsonData;
+                $.each(data, function (i, val) {
+                    var rows = "<tr>" +
+                        "<td>" + val.Id + "</td>" +
+                        "<td>" + val.Tax + "</td>" +
+                        "</tr>";
+                    $("#dataTable").append(rows);
+                });
+            }
+            function errorCallBack(error) {
+                window.alert(error.StatusText)
+            }
+            return obj;
+        }
+
+
+        API: function (apiurl, successCallBack, errorCallBack) {
+            $.ajax({
+                method: "GET",
+                url: apiurl,
+                dataType: "json",
+                success: successCallBack,
+                error: errorCallBack,
+            });
+        };
+    </script>
+</head>
+<body>
+    <div class="container well">
+        <div class="text-center">
+            <h2>DDV List:</h2>
+        </div>
+        <table class="table table-bordered" id="dataTable">
+            <tr>
+                <th>Id</th>
+                <th>Tax</th>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

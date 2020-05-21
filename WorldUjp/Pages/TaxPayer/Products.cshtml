@@ -1,0 +1,47 @@
+﻿@page
+@model WorldUjp.Pages.TaxPayer.ProductsModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Products:</h1>
+<div>
+    <partial name="TaxPayerDataPartial" model="Model.TaxPayer"/>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>DDV</th>
+            </tr>
+            </thead>
+       @foreach (Core.Product product in Model.TaxPayer.Products)
+            {
+            <tr>
+                <td>
+                    @product.Name
+                </td>
+                <td>
+                    @product.Price
+                </td>
+                <td>
+                    @product.DDV?.Tax.ToString("P")
+                </td>
+                </tr>
+            }
+        <tfoot style="visibility:@(!Model.TaxPayer.Products.Any() ? "visible" : "hidden")" class="text-center">
+            <tr>
+                <td colspan="3">
+                    Nothing to display.
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+       
+        <div>
+            <a class="btn btn-outline-primary" asp-page="/Product/ProductManagment" asp-route-id="@Model.TaxPayer.Id">
+                Add Products
+            </a>
+        </div>
+</div>

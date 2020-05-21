@@ -1,0 +1,42 @@
+﻿@page "{id}"
+@model WorldUjp.Pages.Product.ProductManagmentModel
+@{
+    ViewData["Title"] = "Product Managment";
+}
+
+
+<h1>@ViewData["Title"]:</h1>
+<div>
+    <form method="post">
+        <partial name="TaxPayerDataPartial" model="Model.TaxPayer"/>
+
+        <div class="form-row">
+            <input type="hidden" asp-for="@Model.Product.Id" />
+
+            <div class="form-group col-sm-5">
+                <label asp-for="@Model.Product.Name"></label>
+                <input class="form-control" value="@Model.Product.Name" asp-for="@Model.Product.Name" />
+            </div>
+            <div class="form-group col-sm-5">
+                <label asp-for="@Model.Product.Price"></label>
+                <input class="form-control" value="@Model.Product.Price" type="number" asp-for="@Model.Product.Price" />
+            </div>
+            <div class="form-group col-sm-2">
+                <label asp-for="Product.DDVId"></label>
+                <select class="form-control" asp-for="Product.DDVId" asp-items="@Model.DDVs">
+                    <option value="">Pick a DDV</option>
+                </select>
+                <span class="text-danger" asp-validation-for="Product.DDVId"></span>
+            </div>
+        </div>
+
+        <div class="justify-content-between row">
+            <input class="btn btn-outline-primary" type="submit" value="Save" asp-route-id="@Model.TaxPayer.Id" >  
+            <a class="btn btn-outline-primary" asp-page="/TaxPayer/Products" asp-route-id="@Model.TaxPayer.Id">
+                Cancel
+            </a>
+        </div>
+
+
+    </form>
+</div>
